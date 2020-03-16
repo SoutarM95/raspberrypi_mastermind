@@ -1,0 +1,16 @@
+int getButtonInput() {
+    int in = 0;
+    uint32_t times = getTime();
+    if(debug == 2)
+        printf("\tDEBUG: getting input\n");
+    while ((getTime() - times) < INPUT_WAIT * 1000) {
+        if(readPin(16))
+        {
+            in++;
+            if(debug == 2)
+                printf("\tDEBUG: BUTTON PRESSED (%i)\n", in);
+            blink(RED_LED, 1, 250);
+        }
+    }
+    return in;
+}
